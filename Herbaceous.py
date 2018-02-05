@@ -621,8 +621,8 @@ def pot_option():
         while True:
             try:
                 pot_input = int(input('Select which option: \n'))
-                if pot_input != 0 or pot_input != 1 or pot_input != 2:
-                    print("Not a valid input. Enter an appropriate integer.\n")
+                #if pot_input != 0 or pot_input != 1 or pot_input != 2:
+                #    print("Not a valid input. Enter an appropriate integer.\n")
 
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
@@ -688,6 +688,9 @@ def pot_option():
                         break
                 break
 
+            else:
+                print("Enter valid input")
+                continue
 
 def final_pot():
     pot_input = None
