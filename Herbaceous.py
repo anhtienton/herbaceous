@@ -7,6 +7,9 @@ import sys
 # Generate the whole 72 card decks to ensure more randomness and replayability
 # Cards are defined as classes, each with a herb name, an ID for the set, and an overall ID to track
 # TODO: try to replace the classes into a dictionary and remove the setID?
+# TODO: a function to return each herb to its respective pile in case there is a mistake?
+# TODO: Could use the set ID to return when drawn. If 1 = Community garden. If 2 = Private garden, if discard, return
+# TODO: special herbs may only be placed in the glass jar (either make a check or just say in rules)
 
 
 class Rosemary:
@@ -301,15 +304,15 @@ def pot_in_glass_jar(herbs):
     for present_herb in present_special_herb:
         if present_herb == "Mint":
             totalPoints += 1
-            present_special_herb.remove("Mint")
+            special_herb.remove("Mint")
         elif present_herb == "Chive":
             totalPoints += 2
-            present_special_herb.remove("Chive")
+            special_herb.remove("Chive")
         elif present_herb == "Thyme":
             totalPoints += 3
-            present_special_herb.remove("Thyme")
+            special_herb.remove("Thyme")
 
-    if not present_special_herb:
+    if not special_herb:
         totalPoints += 5
 
     clear_potted_herbs(herbs)
@@ -336,9 +339,13 @@ def select_appropriate_pot(current_herb, current_herb_list):
                           ' 3: Small Pots (Different pairs of identical herbs)\n'
                           ' 4: Glass Jar (Any 1 - 3 herbs, bonus from special herbs)\n'
                           ' 0: To stop potting in containers\n'))
+
             if pot_input == 0:
+                return_to_garden(current_herb)
+                del current_herb_list[:]
                 print("Stop potting in containers\n")
                 break
+
             del availableContainers[pot_input]
 
         except ValueError:
@@ -493,10 +500,14 @@ def setup_game():
     discard_card(draw_card(random.choice(allOverallID)))
 
     for count in range(2):
-        plant_2_community_garden(draw_card(random.choice(allOverallID)))
+        drawn_card_setup = draw_card(random.choice(allOverallID))
+        plant_2_community_garden(drawn_card_setup)
+        drawn_card_setup.setID = 1
 
     for count in range(3):
-        plant_2_private_garden(draw_card(random.choice(allOverallID)))
+        drawn_card_setup = draw_card(random.choice(allOverallID))
+        plant_2_private_garden(drawn_card_setup)
+        drawn_card_setup.setID = 2
 
 
 setup_game()
@@ -507,7 +518,6 @@ setup_game()
 # get_input is used to select which herb to pot from each respective garden
 # 2 functions to show the status of the two gardens throughout the game
 # 1 function to show which herbs are ready to be potted. 
-# TODO: a function to return each herb to its respective pile in case there is a mistake?
 
 userInput = None
 
@@ -535,6 +545,15 @@ def show_community_garden_status(current_herbs_present):
 def show_herbs_to_pot(current_herbs_present):
     garden = sorted([o.herbName for o in current_herbs_present])
     return garden
+
+
+def return_to_garden(herb):
+    for herb in herb.cardList:
+        if herb.setID == 1:
+            plant_2_community_garden(herb)
+        if herb.setID == 2:
+            plant_2_private_garden(herb)
+    return
 
 
 ##################
@@ -624,8 +643,6 @@ def pot_option():
         while True:
             try:
                 pot_input = int(input('Select which option: \n'))
-                #if pot_input != 0 or pot_input != 1 or pot_input != 2:
-                #    print("Not a valid input. Enter an appropriate integer.\n")
 
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
@@ -694,6 +711,7 @@ def pot_option():
             else:
                 print("Enter valid input")
                 continue
+
 
 def final_pot():
     pot_input = None
@@ -833,11 +851,14 @@ while len(play_deck) != 0:
 
             if n == 2:
                 plant_2_community_garden(drawn_card)
+                draw_card.setID = 1
                 break
 
             if n == 3:
                 plant_2_private_garden(drawn_card)
+                drawn_card.setID = 2
                 break
 
         if not choices:
             break
+
