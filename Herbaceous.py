@@ -169,6 +169,10 @@ class HerbsToPot:
 herbsToPot = HerbsToPot()
 
 
+def clear_potted_herbs(herbs):
+    del herbs.cardList[:]
+
+
 def select_to_pot(card):
     herbsToPot.cardList.append(card)
     herbsToPot.numberOfCards += 1
@@ -205,6 +209,7 @@ def pot_in_large_pot(herbs):
 
         if herbs.numberOfCards == 7:
             totalPoints += 22
+        clear_potted_herbs(herbs)
         return()
 
 
@@ -231,7 +236,7 @@ def pot_in_wooden_planter(herbs):
 
     if len(unique_set) == 7:
         totalPoints += 14
-
+    clear_potted_herbs(herbs)
     return()
 
 
@@ -268,6 +273,8 @@ def pot_in_small_pots(herbs):
     if len(doubles) == 6:
         totalPoints += 18
 
+    clear_potted_herbs(herbs)
+
     return()
 
 
@@ -287,21 +294,25 @@ def pot_in_glass_jar(herbs):
     if len(herbs.cardList) == 3:
         totalPoints += 6
 
-    special_herb = ["mint", "chive", "thyme"]
+    special_herb = ["chive", "mint", "thyme"]
     herbname_list = sorted([x.herbName for x in herbs.cardList])
     present_special_herb = [herb for herb in herbname_list if herb in special_herb]
 
     for present_herb in present_special_herb:
         if present_herb == "mint":
             totalPoints += 1
+            present_special_herb.remove("mint")
         elif present_herb == "chive":
             totalPoints += 2
+            present_special_herb.remove("chive")
         elif present_herb == "thyme":
             totalPoints += 3
+            present_special_herb.remove("thyme")
 
-    if len(present_special_herb) == 3:
+    if not present_special_herb:
         totalPoints += 5
 
+    clear_potted_herbs(herbs)
     return()
 
 
@@ -613,8 +624,8 @@ def pot_option():
         while True:
             try:
                 pot_input = int(input('Select which option: \n'))
-                if pot_input != 0 or pot_input != 1 or pot_input != 2:
-                    print("Not a valid input. Enter an appropriate integer.\n")
+                #if pot_input != 0 or pot_input != 1 or pot_input != 2:
+                #    print("Not a valid input. Enter an appropriate integer.\n")
 
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
@@ -680,6 +691,9 @@ def pot_option():
                         break
                 break
 
+            else:
+                print("Enter valid input")
+                continue
 
 def final_pot():
     pot_input = None
