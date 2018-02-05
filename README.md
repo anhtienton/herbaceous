@@ -4,7 +4,7 @@ Herbaceous SPV is the Single Player Variant of Steve Finn, Eduardo Baraf, and Be
 
 [Herbaceous BGG link](https://boardgamegeek.com/boardgame/195314/herbaceous)
 
-This is a fan project to see if it is possible to replicate the Herbaceous mechanics/engine in Python as a text-based game. Although it is not perfect, it should run on linux and Mac with Python 3.6. The game is played through command line inputs. This was not made for monetary reasons (as it is on github) but only as a fun side-project and proof of concept.
+This is a fan project to see if it was possible to replicate the Herbaceous mechanics/engine in Python as a text-based game. Although it is not perfect, it should run on linux and Mac with Python 3.6. The game is played through command line inputs. This was not made for monetary reasons (as it is on github) but only as a fun side-project and proof of concept.
 
 ### Gameplay screenshot
 
@@ -47,9 +47,10 @@ The game can end in 2 ways:
 * There is no more cards to draw. You are then given one last chance to pot any remaining herbs.
 
 ## Disclaimer
-2018 anhtienton
 
-Distributed for Free with permission of the publisher. Pencil First Games, LLC reserves all rights to the digital versions of Herbaceous in all forms and has copyright. 
+### Distributed for Free with permission of the publisher. Pencil First Games, LLC reserves all rights to the digital versions of Herbaceous in all forms and has copyright. 
+
+2018 anhtienton
 
 All game ideas and rules belong to Pencil First Games and the game creators (Eduardo Baraf, Steve Finn, Beth Sobel, and Keith Matejka). Please make sure to give them credit for such a pleasant and relaxing game. This is just a recreation of their game on Python.
 
