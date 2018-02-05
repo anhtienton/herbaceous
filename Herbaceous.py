@@ -169,6 +169,10 @@ class HerbsToPot:
 herbsToPot = HerbsToPot()
 
 
+def clear_potted_herbs(herbs):
+    del HerbsToPot.cardList[:]
+
+
 def select_to_pot(card):
     herbsToPot.cardList.append(card)
     herbsToPot.numberOfCards += 1
@@ -205,6 +209,7 @@ def pot_in_large_pot(herbs):
 
         if herbs.numberOfCards == 7:
             totalPoints += 22
+        clear_potted_herbs(herbs)
         return()
 
 
@@ -231,7 +236,7 @@ def pot_in_wooden_planter(herbs):
 
     if len(unique_set) == 7:
         totalPoints += 14
-
+    clear_potted_herbs(herbs)
     return()
 
 
@@ -268,6 +273,8 @@ def pot_in_small_pots(herbs):
     if len(doubles) == 6:
         totalPoints += 18
 
+    clear_potted_herbs(herbs)
+
     return()
 
 
@@ -302,6 +309,7 @@ def pot_in_glass_jar(herbs):
     if len(present_special_herb) == 3:
         totalPoints += 5
 
+    clear_potted_herbs(herbs)
     return()
 
 
