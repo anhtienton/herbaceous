@@ -301,15 +301,15 @@ def pot_in_glass_jar(herbs):
     for present_herb in present_special_herb:
         if present_herb == "mint":
             totalPoints += 1
-            special_herb.remove("mint")
+            present_special_herb.remove("mint")
         elif present_herb == "chive":
             totalPoints += 2
-            special_herb.remove("chive")
+            present_special_herb.remove("chive")
         elif present_herb == "thyme":
             totalPoints += 3
-            special_herb.remove("thyme")
+            present_special_herb.remove("thyme")
 
-    if not special_herb:
+    if not present_special_herb:
         totalPoints += 5
 
     clear_potted_herbs(herbs)
