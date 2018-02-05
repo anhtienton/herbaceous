@@ -19,6 +19,7 @@ Three cards are drawn from the deck. Each card is drawn one at a time, and decid
 * Private Garden
 * Community Garden
 * Discard pile
+
 The same location cannot be selected twice in the same set of 3 cards
 
 ### Potting your herbs
