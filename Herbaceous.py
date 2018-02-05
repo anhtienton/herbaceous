@@ -1,82 +1,83 @@
 import random
 import sys
 
-########################
-##### 72 CARD DECK #####
-########################
+################
+# 72 CARD DECK #
+################
 # Generate the whole 72 card decks to ensure more randomness and replayability
 # Cards are defined as classes, each with a herb name, an ID for the set, and an overall ID to track
 # TODO: try to replace the classes into a dictionary and remove the setID?
 
 
 class Rosemary:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Rosemary"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Saffron:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Saffron"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Bay:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Bay"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Lavender:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Lavender"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Dill:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Dill"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Sage:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Sage"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Tarragon:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Tarragon"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Chive:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Chive"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Mint:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Mint"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
 
 
 class Thyme:
-    def __init__(self, setid, overallid):
+    def __init__(self, setid, overid):
         self.herbName = "Thyme"
         self.setID = setid
-        self.overallID = overallid
+        self.overallID = overid
+
 
 # Generate the cards from each herb class, assigning them an overall ID
 overallid = 1
@@ -149,37 +150,42 @@ for i in range(len(completeDeck)):
         orderedDeck.append(completeDeck[i][j])
 
 
-#########################
-###### 4 CONTAINERS #####
-#########################
+################
+# 4 CONTAINERS #
+################
 # Create the four containers in which the herbs may be potted: large pot, wooden planter, small pots, and glass jar
-# Make a class that includes all the herbs that will be potted. These are added from the community garden and the private garden
+# Make a class that includes all the herbs that will be potted. 
+# These are added from the community garden and the private garden
 # They are actually functions which cannot be re-selected. They all take in the same class of herbsToPot. 
 # Whenever a container is selected to be potted, the points are added to the global points tracker
 
-class herbsToPot:
+class HerbsToPot:
     def __init__(self):
         self.cardList = []
         self.numberOfCards = 0
 
-herbsToPot = herbsToPot()
 
-def selectToPot(card):
+# Initiate herbsToPot class that holds all herbs
+herbsToPot = HerbsToPot()
+
+
+def select_to_pot(card):
     herbsToPot.cardList.append(card)
     herbsToPot.numberOfCards += 1
 
 
-def allSame(items):
+def all_same(items):
     return all(x.herbName == items[0].herbName for x in items)
 
-def potInLargePot(herbs):
+
+def pot_in_large_pot(herbs):
     # print(herbs.cardList)
     global totalPoints
 
     if herbs.numberOfCards == 1:
         totalPoints += 2
         return()
-    if allSame(herbs.cardList) == False:
+    if not all_same(herbs.cardList):
         return()
     else:
         if herbs.numberOfCards == 2:
@@ -202,46 +208,46 @@ def potInLargePot(herbs):
         return()
 
 
-def potInWoodenPlanter(herbs):
-    herbNameList = [x.herbName for x in herbs.cardList]
-    uniqueSet = set(herbNameList)
+def pot_in_wooden_planter(herbs):
+    herbname_list = [x.herbName for x in herbs.cardList]
+    unique_set = set(herbname_list)
 
     global totalPoints
 
-    if len(uniqueSet) == 2:
+    if len(unique_set) == 2:
         totalPoints += 3
 
-    if len(uniqueSet) == 3:
+    if len(unique_set) == 3:
         totalPoints += 4
 
-    if len(uniqueSet) == 4:
+    if len(unique_set) == 4:
         totalPoints += 6
 
-    if len(uniqueSet) == 5:
+    if len(unique_set) == 5:
         totalPoints += 8
 
-    if len(uniqueSet) == 6:
+    if len(unique_set) == 6:
         totalPoints += 12
 
-    if len(uniqueSet) == 7:
+    if len(unique_set) == 7:
         totalPoints += 14
 
     return()
 
 
-def potInSmallPots(herbs):
+def pot_in_small_pots(herbs):
 
     global totalPoints
 
-    herbNameList = sorted([x.herbName for x in herbs.cardList])
-    tempSet = []
+    herbname_list = sorted([x.herbName for x in herbs.cardList])
+    temp_set = []
     doubles = []
-    for herb in herbNameList:
-        if herb in tempSet:
+    for herb in herbname_list:
+        if herb in temp_set:
             doubles.append(herb)
-            tempSet.remove(herb)
+            temp_set.remove(herb)
         else:
-            tempSet.append(herb)
+            temp_set.append(herb)
     doubles = set(doubles)
 
     if len(doubles) == 1:
@@ -264,7 +270,8 @@ def potInSmallPots(herbs):
 
     return()
 
-def potInGlassJar(herbs):
+
+def pot_in_glass_jar(herbs):
 
     global totalPoints
 
@@ -280,204 +287,221 @@ def potInGlassJar(herbs):
     if len(herbs.cardList) == 3:
         totalPoints += 6
 
-    specHerb = ["mint", "chive", "thyme"]
-    herbNameList = sorted([x.herbName for x in herbs.cardList])
-    presentSpecHerb = [herb for herb in herbNameList if herb in specHerb]
+    special_herb = ["mint", "chive", "thyme"]
+    herbname_list = sorted([x.herbName for x in herbs.cardList])
+    present_special_herb = [herb for herb in herbname_list if herb in special_herb]
 
-    for i in presentSpecHerb:
-        if i == "mint":
+    for present_herb in present_special_herb:
+        if present_herb == "mint":
             totalPoints += 1
-        elif i == "chive":
+        elif present_herb == "chive":
             totalPoints += 2
-        elif i == "thyme":
+        elif present_herb == "thyme":
             totalPoints += 3
 
-    if len(presentSpecHerb) == 3:
+    if len(present_special_herb) == 3:
         totalPoints += 5
 
     return()
 
+
 # selecting the appropriate container to pot herbs in
 availableContainers = {1: "Large Pot", 2: "Wooden Planter", 3: "Small Pots", 4: "Glass Jar"}
 
-def selectAppropriatePot(currentHerb, currentHerbList):
+
+def select_appropriate_pot(current_herb, current_herb_list):
 
     global totalPoints
 
-    print("Current herbs to pot: ", ", ".join(showHerbsToPot(currentHerbList)))
+    print("Current herbs to pot: ", ", ".join(show_herbs_to_pot(current_herb_list)))
 
     global availableContainers
 
     print("Available containers:", availableContainers,"\n")
     while True:
         try:
-            n = int(input('Which container would you like to pot the herbs in?\n'
+            pot_input = int(input('Which container would you like to pot the herbs in?\n'
                           ' 1: Large Pot (All identical herbs)\n 2: Wooden Planter (All different herbs)\n'
                           ' 3: Small Pots (Different pairs of identical herbs)\n'
                           ' 4: Glass Jar (Any 1 - 3 herbs, bonus from special herbs)\n'
                           ' 0: To stop potting in containers\n'))
-            if n == 0:
+            if pot_input == 0:
                 print("Stop potting in containers\n")
                 break
-            del availableContainers[n]
+            del availableContainers[pot_input]
+
+        except ValueError:
+            print("Not a valid input. Enter an appropriate integer.\n")
+            continue
 
         except KeyError:
             print("Pot already full. Pick another pot\n")
             print("Available containers:", availableContainers, "\n")
             continue
 
-        if n == 1:
-            potInLargePot(currentHerb)
+        if pot_input == 1:
+            pot_in_large_pot(current_herb)
             print("Current point total: ", totalPoints)
 
             break
 
-        if n == 2:
-            potInWoodenPlanter(currentHerb)
+        if pot_input == 2:
+            pot_in_wooden_planter(current_herb)
             print("Current point total: ", totalPoints)
 
             break
 
-        if n == 3:
-            potInSmallPots(currentHerb)
+        if pot_input == 3:
+            pot_in_small_pots(current_herb)
             print("Current point total: ", totalPoints)
 
             break
 
-        if n == 4:
-            potInGlassJar(currentHerb)
+        if pot_input == 4:
+            pot_in_glass_jar(current_herb)
             print("Current point total: ", totalPoints)
             break
 
 
-#######################
-#### CARD ACTIONS #####
-#######################
+################
+# CARD ACTIONS #
+################
 # Important card actions functions needed to play
-# Identify a card ID which is used when drawing a card, and the draw card which returns which card has been drawn from the deck
+# Identify a card ID which is used when drawing a card, 
+# The draw card  returns which card has been drawn from the deck
 # Create a playdeck of 36 cards from the complete deck. 
 
-def identifyCard(cardID):
+def identify_card(card_id):
     for setCount in range(len(completeDeck)):
         for herbCount in range(len(completeDeck[setCount])):
-            if completeDeck[setCount][herbCount].overallID == cardID:
+            if completeDeck[setCount][herbCount].overallID == card_id:
                 return completeDeck[setCount][herbCount]
 
 
-
-def deckSetup():
-    playDeck = random.sample(orderedDeck, 36)
-    return playDeck
-
-playDeck = deckSetup()
-
-allOverallID = [o.overallID for o in playDeck]
-
-def drawCard(cardID):
-    drawnCard = identifyCard(cardID)
-    allOverallID.remove(cardID)
-    return(drawnCard)
+def deck_setup():
+    current_deck_setup = random.sample(orderedDeck, 36)
+    return current_deck_setup
 
 
-###################
-##### GARDENS #####
-###################
+play_deck = deck_setup()
+
+allOverallID = [o.overallID for o in play_deck]
+
+
+def draw_card(card_id):
+    current_drawn_card = identify_card(card_id)
+    allOverallID.remove(card_id)
+    return current_drawn_card
+
+
+###########
+# GARDENS #
+###########
 # 3 gardens are generated to track the cards in play: discard pile, community garden, and private garden
 # The discard pile requires 2 functions: the discard card during play, and the discard set from the community garden 
-# The community garden holds at most 4 herbs, and has a function to remove a herb when it is potted, and add a card when drawn
+# The community garden holds at most 4 herbs, 
+# and has a function to remove a herb when it is potted, and add a card when drawn
 # The private garden holds as many cards as needed, and has the same functions as the community garden
 
-class discardGarden:
-    def __init__(self):
-        self.numberOfCards = 0
-        self.cardList = []
-
-def discardCard(card):
-    discardGarden.cardList.append(card)
-    discardGarden.numberOfCards += 1
-    return discardGarden
-
-
-def discardSetCards(set):
-    discardGarden.cardList.append(set)
-    numCardsDiscarded = len(set)
-    discardGarden.numberOfCards += numCardsDiscarded
-
-
-discardGarden = discardGarden()
-
-
-class communityGarden:
+class DiscardGarden:
     def __init__(self):
         self.numberOfCards = 0
         self.cardList = []
 
 
-communityGarden = communityGarden()
+def discard_card(card):
+    DiscardGarden.cardList.append(card)
+    DiscardGarden.numberOfCards += 1
+    return DiscardGarden
 
 
-def plant2CommunityGarden(card):
-    communityGarden.numberOfCards += 1
-    if communityGarden.numberOfCards == 5:
-        communityGarden.cardList.append(card)
-        discardSetCards(communityGarden.cardList)
+def discard_set_cards(current_set):
+    DiscardGarden.cardList.append(current_set)
+    num_cards_discarded = len(current_set)
+    DiscardGarden.numberOfCards += num_cards_discarded
+
+
+DiscardGarden = DiscardGarden()
+
+
+class CommunityGarden:
+    def __init__(self):
+        self.numberOfCards = 0
+        self.cardList = []
+
+
+CommunityGarden = CommunityGarden()
+
+
+def plant_2_community_garden(card):
+    CommunityGarden.numberOfCards += 1
+    if CommunityGarden.numberOfCards == 5:
+        CommunityGarden.cardList.append(card)
+        discard_set_cards(CommunityGarden.cardList)
         print("More than 4 cards, discard community garden.")
-        communityGarden.cardList = []
-        communityGarden.numberOfCards = 0
+        CommunityGarden.cardList = []
+        CommunityGarden.numberOfCards = 0
     else:
-        communityGarden.cardList.append(card)
+        CommunityGarden.cardList.append(card)
 
-def removeFromCommunityGarden(card):
-    communityGarden.numberOfCards -= 1
-    communityGarden.cardList.remove(card)
 
-class privateGarden:
+def remove_from_community_garden(card):
+    CommunityGarden.numberOfCards -= 1
+    CommunityGarden.cardList.remove(card)
+
+
+class PrivateGarden:
     def __init__(self):
         self.numberOfCards = 0
         self.cardList = []
 
-privateGarden = privateGarden()
 
-def plant2PrivateGarden(card):
-    privateGarden.numberOfCards += 1
-    privateGarden.cardList.append(card)
+PrivateGarden = PrivateGarden()
 
-def removeFromPrivateGarden(card):
-    privateGarden.numberOfCards -= 1
-    privateGarden.cardList.remove(card)
 
-######################
-##### SETUP GAME #####
-######################
+def plant_2_private_garden(card):
+    PrivateGarden.numberOfCards += 1
+    PrivateGarden.cardList.append(card)
+
+
+def remove_from_private_garden(card):
+    PrivateGarden.numberOfCards -= 1
+    PrivateGarden.cardList.remove(card)
+
+
+##############
+# SETUP GAME #
+##############
 # Set the total points to 0
 # Distribute the appropriate cards to each pile
 
 totalPoints = 0
 
 
-def setupGame():
-    discardCard(drawCard(random.choice(allOverallID)))
+def setup_game():
+    discard_card(draw_card(random.choice(allOverallID)))
 
-    for i in range(2):
-        plant2CommunityGarden(drawCard(random.choice(allOverallID)))
+    for count in range(2):
+        plant_2_community_garden(draw_card(random.choice(allOverallID)))
 
-    for i in range(3):
-        plant2PrivateGarden(drawCard(random.choice(allOverallID)))
+    for count in range(3):
+        plant_2_private_garden(draw_card(random.choice(allOverallID)))
 
 
-setupGame()
+setup_game()
 
-############################################
-##### IMPORTANT FUNCTIONS FOR GAMEPLAY #####
-############################################
-# getInput is used to select which herb to pot from each respective garden
+####################################
+# IMPORTANT FUNCTIONS FOR GAMEPLAY #
+####################################
+# get_input is used to select which herb to pot from each respective garden
 # 2 functions to show the status of the two gardens throughout the game
 # 1 function to show which herbs are ready to be potted. 
 # TODO: a function to return each herb to its respective pile in case there is a mistake?
 
 userInput = None
 
-def getInput(length):
+
+def get_input():
     while True:
         try:
             num = int(input('Select which herb to pot: \nEnter 0 to stop potting herbs\n'))
@@ -487,226 +511,230 @@ def getInput(length):
         return num
 
 
-def showPrivateGardenStatus(currentHerbsPresent):
-    garden = sorted([o.herbName for o in currentHerbsPresent])
-    return(garden)
+def show_private_garden_status(current_herbs_present):
+    garden = sorted([o.herbName for o in current_herbs_present])
+    return garden
 
 
-def showCommunityGardenStatus(currentHerbsPresent):
-    garden = sorted([o.herbName for o in currentHerbsPresent])
-    return(garden)
+def show_community_garden_status(current_herbs_present):
+    garden = sorted([o.herbName for o in current_herbs_present])
+    return garden
 
-def showHerbsToPot(currentHerbsPresent):
-    garden = sorted([o.herbName for o in currentHerbsPresent])
-    return(garden)
 
-##########################
-##### POTTING ACTION #####    
-##########################
+def show_herbs_to_pot(current_herbs_present):
+    garden = sorted([o.herbName for o in current_herbs_present])
+    return garden
+
+
+##################
+# POTTING ACTION #   
+##################
 # 2 functions to describe the potting actions from either a private garden or a community garden
 # Function to ask which garden to select herbs to pot
 
-def potFromPrivateGarden():
+def pot_from_private_garden():
 
-    userInput = None
+    user_input = None
 
-    while userInput != 0:
-        print("Current herbs in private garden: ",", ".join(showPrivateGardenStatus(privateGarden.cardList)))
+    while user_input != 0:
+        print("Current herbs in private garden: ", ", ".join(show_private_garden_status(PrivateGarden.cardList)))
 
-        print("Current herbs ready to pot: ",", ".join(showHerbsToPot(herbsToPot.cardList)),"\n")
+        print("Current herbs ready to pot: ", ", ".join(show_herbs_to_pot(herbsToPot.cardList)), "\n")
 
-        privateGarden.cardList.sort(key=lambda x: x.herbName)
+        PrivateGarden.cardList.sort(key=lambda x: x.herbName)
 
-        userInput = getInput(privateGarden.numberOfCards)
+        user_input = get_input()
 
-        if userInput == 0:
+        if user_input == 0:
             print("Not potting herbs")
             break
 
-        potInputIndexInPrivate = userInput - 1
+        pot_input_index_in_private = user_input - 1
         try:
-            privateGarden.cardList[potInputIndexInPrivate]
+            PrivateGarden.cardList[pot_input_index_in_private]
         except IndexError:
             print("not a valid option")
             continue
         else:
-            selectedHerb = privateGarden.cardList[potInputIndexInPrivate]
+            selected_herb = PrivateGarden.cardList[pot_input_index_in_private]
 
-        selectToPot(selectedHerb)
-        removeFromPrivateGarden(selectedHerb)
+        select_to_pot(selected_herb)
+        remove_from_private_garden(selected_herb)
 
-        if privateGarden.numberOfCards == 0:
+        if PrivateGarden.numberOfCards == 0:
             print("nothing else to pot from private garden \n")
             break
 
-def potFromCommunityGarden():
 
-    userInput = None
+def pot_from_community_garden():
 
-    while userInput != 0:
+    user_input = None
 
-        print("Current herbs in community garden: ",", ".join(showCommunityGardenStatus(communityGarden.cardList)))
+    while user_input != 0:
 
-        print("Current herbs ready to pot: ",", ".join(showHerbsToPot(herbsToPot.cardList)),"\n")
+        print("Current herbs in community garden: ", ", ".join(show_community_garden_status(CommunityGarden.cardList)))
 
-        communityGarden.cardList.sort(key=lambda x: x.herbName)
+        print("Current herbs ready to pot: ", ", ".join(show_herbs_to_pot(herbsToPot.cardList)), "\n")
 
-        userInput = getInput(communityGarden.numberOfCards)
+        CommunityGarden.cardList.sort(key=lambda x: x.herbName)
 
-        if userInput == 0:
+        user_input = get_input()
+
+        if user_input == 0:
             print("Not potting herbs")
             break
 
-        potInputIndexInCommunity= userInput - 1
+        pot_input_index_in_community = user_input - 1
         try:
-            communityGarden.cardList[potInputIndexInCommunity]
+            CommunityGarden.cardList[pot_input_index_in_community]
         except IndexError:
             print("not a valid option")
             continue
         else:
-            selectedHerb = communityGarden.cardList[potInputIndexInCommunity]
+            selected_herb = CommunityGarden.cardList[pot_input_index_in_community]
 
-        selectToPot(selectedHerb)
-        removeFromCommunityGarden(selectedHerb)
+        select_to_pot(selected_herb)
+        remove_from_community_garden(selected_herb)
 
-        if communityGarden.numberOfCards == 0:
+        if CommunityGarden.numberOfCards == 0:
             print("nothing else to pot from community garden \n")
             break
 
 
-def potOption():
+def pot_option():
 
-    potInput = None
-    additionalInput = None
+    pot_input = None
 
+    while pot_input != 0:
 
-    while potInput != 0:
-
-        checkEndGame()
+        check_end_game()
 
         print(" 0: Don't pot anything\n 1: Pot from private garden\n 2: Pot from community garden")
         while True:
             try:
-                potInput = int(input('Select which option: \n'))
-                if potInput != 0 or potInput != 1 or potInput != 2:
+                pot_input = int(input('Select which option: \n'))
+                if pot_input != 0 or pot_input != 1 or pot_input != 2:
                     print("Not a valid input. Enter an appropriate integer.\n")
 
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
                 continue
 
-            if potInput == 0:
+            if pot_input == 0:
                 print("Not potting, proceed to draw card\n")
                 break
 
-            if potInput == 1:
+            if pot_input == 1:
                 print("Potting from private garden\n")
-                potFromPrivateGarden()
+                pot_from_private_garden()
 
-                print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
-                print("Current herbs in community garden: ", ", ".join(showCommunityGardenStatus(communityGarden.cardList)))
+                print("\nCurrent herbs ready to pot: ", ", ".join(show_herbs_to_pot(herbsToPot.cardList)), "\n")
+                print("Current herbs in community garden: "
+                      "", ", ".join(show_community_garden_status(CommunityGarden.cardList)))
                 while True:
                     try:
-                        additionalInput = int(input('Add more herbs from community garden?\n 0: No\n 1: Yes\n'))
-                        if additionalInput != 0 or additionalInput != 1:
+                        additional_input = int(input('Add more herbs from community garden?\n 0: No\n 1: Yes\n'))
+                        if additional_input != 0 or additional_input != 1:
                             print("Not a valid input. Enter an appropriate integer.\n")
 
                     except ValueError:
                         print("Not a valid input. Enter an appropriate integer.\n")
                         continue
 
-                    if additionalInput == 1:
-                        potFromCommunityGarden()
-                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                    if additional_input == 1:
+                        pot_from_community_garden()
+                        select_appropriate_pot(herbsToPot, herbsToPot.cardList)
                         break
 
-                    if additionalInput == 0:
-                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                    if additional_input == 0:
+                        select_appropriate_pot(herbsToPot, herbsToPot.cardList)
                         break
                 break
 
-
-            if potInput == 2:
+            if pot_input == 2:
                 print("Potting from community garden\n")
-                potFromCommunityGarden()
+                pot_from_community_garden()
 
-                print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
-                print("Current herbs in private garden: ", ", ".join(showPrivateGardenStatus(privateGarden.cardList)))
+                print("\nCurrent herbs ready to pot: ", ", ".join(show_herbs_to_pot(herbsToPot.cardList)), "\n")
+                print("Current herbs in private garden: "
+                      "", ", ".join(show_private_garden_status(PrivateGarden.cardList)))
 
                 while True:
                     try:
-                        additionalInput = int(input('Add more herbs from private garden?\n 0: No\n 1: Yes\n'))
-                        if additionalInput != 0 or additionalInput != 1:
+                        additional_input = int(input('Add more herbs from private garden?\n 0: No\n 1: Yes\n'))
+                        if additional_input != 0 or additional_input != 1:
                             print("Not a valid input. Enter an appropriate integer.\n")
 
                     except ValueError or UnboundLocalError:
                         print("Not a valid input. Enter an appropriate integer.\n")
                         continue
 
-                    if additionalInput == 1:
+                    if additional_input == 1:
                         print("Potting from private garden\n")
-                        potFromPrivateGarden()
-                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                        pot_from_private_garden()
+                        select_appropriate_pot(herbsToPot, herbsToPot.cardList)
                         break
 
-                    if additionalInput == 0:
-                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                    if additional_input == 0:
+                        select_appropriate_pot(herbsToPot, herbsToPot.cardList)
                         break
                 break
 
 
-def finalPot():
-    potInput = None
-
-    while potInput != 0:
+def final_pot():
+    pot_input = None
+    additional_input = None
+    while pot_input != 0:
 
         print(" 0: End game\n 1: Pot from private garden\n 2: Pot from community garden")
-        potInput = int(input('Select which option: \n'))
+        pot_input = int(input('Select which option: \n'))
 
-        if potInput == 0:
+        if pot_input == 0:
             break
 
-        if potInput == 1:
+        if pot_input == 1:
             print("Potting from private garden\n")
-            potFromPrivateGarden()
+            pot_from_private_garden()
 
-            print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
-            print("Current herbs in community garden: ", ", ".join(showCommunityGardenStatus(communityGarden.cardList)))
+            print("\nCurrent herbs ready to pot: ", ", ".join(show_herbs_to_pot(herbsToPot.cardList)), "\n")
+            print("Current herbs in community garden: "
+                  "", ", ".join(show_community_garden_status(CommunityGarden.cardList)))
             try:
-                additionalInput = int(input('Add more herbs from community garden?\n 0: No\n 1: Yes\n'))
+                additional_input = int(input('Add more herbs from community garden?\n 0: No\n 1: Yes\n'))
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
 
-            if additionalInput == 1:
+            if additional_input == 1:
                 print("Potting from community garden\n")
-                potFromCommunityGarden()
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                pot_from_community_garden()
+                select_appropriate_pot(herbsToPot, herbsToPot.cardList)
 
             else:
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                select_appropriate_pot(herbsToPot, herbsToPot.cardList)
 
-        if potInput == 2:
+        if pot_input == 2:
             print("Potting from community garden\n")
-            potFromCommunityGarden()
+            pot_from_community_garden()
 
-            print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
-            print("Current herbs in private garden: ", ", ".join(showPrivateGardenStatus(privateGarden.cardList)))
+            print("\nCurrent herbs ready to pot: ", ", ".join(show_herbs_to_pot(herbsToPot.cardList)), "\n")
+            print("Current herbs in private garden: ", ", ".join(show_private_garden_status(PrivateGarden.cardList)))
 
             try:
-                additionalInput = int(input('Add more herbs from private garden?\n 0: No\n 1: Yes\n'))
+                additional_input = int(input('Add more herbs from private garden?\n 0: No\n 1: Yes\n'))
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
                 continue
-            if additionalInput == 1:
+            if additional_input == 1:
                 print("Potting from private garden\n")
-                potFromPrivateGarden()
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                pot_from_private_garden()
+                select_appropriate_pot(herbsToPot, herbsToPot.cardList)
 
             else:
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                select_appropriate_pot(herbsToPot, herbsToPot.cardList)
 
         else:
             continue
+
 
 def ranking():
     global totalPoints
@@ -714,31 +742,33 @@ def ranking():
     if totalPoints < 37:
         print("You are a Fledgling Grower")
 
-    if totalPoints >=37 and totalPoints <=41:
+    if 37 <= totalPoints <= 41:
         print("You are a Beginning Planter")
 
-    if totalPoints >=42 and totalPoints <=46:
+    if 42 <= totalPoints <= 46:
         print("You are a Clever Cultivator")
 
-    if totalPoints >=47 and totalPoints <=51:
+    if 47 <= totalPoints <= 51:
         print("You are a Talented Gardener")
 
-    if totalPoints >=52 and totalPoints <=56:
+    if 52 <= totalPoints <= 56:
         print("You are a PRofessional Herbalist")
 
     if totalPoints > 56:
         print("You are a True Green Thumb Harvester")
 
-####################
-##### GAMEPLAY #####
-####################
+
+############
+# GAMEPLAY #
+############
 # The gameplay loops continually until the generated play deck is empty, or there are no more containers to be potted
-# 1. An option first asks if the player wants to pot any current herbs, if yes, then pot the appropriate herbs, if not move on
+# 1. An option first asks if the player wants to pot any current herbs, 
+# if yes, then pot the appropriate herbs, if not move on
 # 2. A card is drawn and 3 options are given: discard, plant in community garden, or plant in private garden. 
 # Each place can only be chosen once during the plant step before you can pot again
 # 3. This is repeated until the deck runs out or there are no available containers anymore
 
-def checkEndGame():
+def check_end_game():
     if not availableContainers:
         print("No more containers available. Game finished!")
         print("Final point total: ", totalPoints)
@@ -747,33 +777,33 @@ def checkEndGame():
 
     if not allOverallID:
         print("Deck is empty. Game finished! Pot one last time:")
-        finalPot()
+        final_pot()
         print("Final point total: ", totalPoints)
         ranking()
         sys.exit()
 
-while len(playDeck) != 0:
+
+while len(play_deck) != 0:
 
     print("Current point total: ", totalPoints)
-    print("Herbs in community garden: ", ", ".join(showCommunityGardenStatus(communityGarden.cardList)))
-    print("Herbs in private garden: ", ", ".join(showPrivateGardenStatus(privateGarden.cardList)), "\n")
+    print("Herbs in community garden: ", ", ".join(show_community_garden_status(CommunityGarden.cardList)))
+    print("Herbs in private garden: ", ", ".join(show_private_garden_status(PrivateGarden.cardList)), "\n")
 
-
-    potOption()
+    pot_option()
 
     choices = {1: 'Discard pile', 2: 'Community Garden', 3: 'Private Garden'}
     while True:
-        #checkEndGame()
-        drawnCard = drawCard(random.choice(allOverallID))
-        print("Drawn card: ", drawnCard.herbName.upper(), "\n")
-        print("Herbs in community garden: ", ", ".join(showCommunityGardenStatus(communityGarden.cardList)))
-        print("Herbs in private garden: ", ", ".join(showPrivateGardenStatus(privateGarden.cardList)),"\n")
+        drawn_card = draw_card(random.choice(allOverallID))
+        print("Drawn card: ", drawn_card.herbName.upper(), "\n")
+        print("Herbs in community garden: ", ", ".join(show_community_garden_status(CommunityGarden.cardList)))
+        print("Herbs in private garden: ", ", ".join(show_private_garden_status(PrivateGarden.cardList)), "\n")
 
         while True:
 
             try:
                 print("Remaining places: ", choices)
-                n = int(input('Select where to place card: \n 1: Discard pile\n 2: Community garden\n 3: Private garden\n'))
+                n = int(input('Select where to place card: '
+                              '\n 1: Discard pile\n 2: Community garden\n 3: Private garden\n'))
                 del choices[n]
 
             except KeyError:
@@ -784,15 +814,15 @@ while len(playDeck) != 0:
                 continue
 
             if n == 1:
-                discardCard(drawnCard)
+                discard_card(drawn_card)
                 break
 
             if n == 2:
-                plant2CommunityGarden(drawnCard)
+                plant_2_community_garden(drawn_card)
                 break
 
             if n == 3:
-                plant2PrivateGarden(drawnCard)
+                plant_2_private_garden(drawn_card)
                 break
 
         if not choices:
