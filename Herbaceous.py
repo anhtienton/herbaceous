@@ -1,9 +1,6 @@
 import random
 import sys
 
-# TODO: check the error UnboundLocalError: local variable 'additionalInput' referenced before assignment at L604
-
-
 ########################
 ##### 72 CARD DECK #####
 ########################
@@ -588,64 +585,75 @@ def potOption():
         checkEndGame()
 
         print(" 0: Don't pot anything\n 1: Pot from private garden\n 2: Pot from community garden")
-        potInput = int(input('Select which option: \n'))
-
-        if potInput == 0:
-            print("Not potting, proceed to draw card\n")
-            break
-
-        if potInput == 1:
-            print("Potting from private garden\n")
-            potFromPrivateGarden()
-
-            print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
-            print("Current herbs in community garden: ", ", ".join(showCommunityGardenStatus(communityGarden.cardList)))
-
+        while True:
             try:
-                additionalInput = int(input('Add more herbs from community garden?\n 0: No\n 1: Yes\n'))
+                potInput = int(input('Select which option: \n'))
+                if potInput != 0 or potInput != 1 or potInput != 2:
+                    print("Not a valid input. Enter an appropriate integer.\n")
+
             except ValueError:
                 print("Not a valid input. Enter an appropriate integer.\n")
                 continue
 
-            if additionalInput == 1:
-                potFromCommunityGarden()
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+            if potInput == 0:
+                print("Not potting, proceed to draw card\n")
+                break
 
-            if additionalInput == 0:
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
-
-            else:
-                #selectAppropriatePot(herbsToPot, herbsToPot.cardList)
-                continue
-
-        if potInput == 2:
-            print("Potting from community garden\n")
-            potFromCommunityGarden()
-
-            print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
-            print("Current herbs in private garden: ", ", ".join(showPrivateGardenStatus(privateGarden.cardList)))
-
-            try:
-                additionalInput = int(input('Add more herbs from private garden?\n 0: No\n 1: Yes\n'))
-
-            except ValueError or UnboundLocalError:
-                print("Not a valid input. Enter an appropriate integer.\n")
-                continue
-            if additionalInput == 1:
+            if potInput == 1:
                 print("Potting from private garden\n")
                 potFromPrivateGarden()
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
 
-            if additionalInput == 0:
-                selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
+                print("Current herbs in community garden: ", ", ".join(showCommunityGardenStatus(communityGarden.cardList)))
+                while True:
+                    try:
+                        additionalInput = int(input('Add more herbs from community garden?\n 0: No\n 1: Yes\n'))
+                        if additionalInput != 0 or additionalInput != 1:
+                            print("Not a valid input. Enter an appropriate integer.\n")
+
+                    except ValueError:
+                        print("Not a valid input. Enter an appropriate integer.\n")
+                        continue
+
+                    if additionalInput == 1:
+                        potFromCommunityGarden()
+                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                        break
+
+                    if additionalInput == 0:
+                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                        break
+                break
 
 
-            else:
-                #selectAppropriatePot(herbsToPot, herbsToPot.cardList)
-                continue
+            if potInput == 2:
+                print("Potting from community garden\n")
+                potFromCommunityGarden()
 
-        else:
-            continue
+                print("\nCurrent herbs ready to pot: ", ", ".join(showHerbsToPot(herbsToPot.cardList)), "\n")
+                print("Current herbs in private garden: ", ", ".join(showPrivateGardenStatus(privateGarden.cardList)))
+
+                while True:
+                    try:
+                        additionalInput = int(input('Add more herbs from private garden?\n 0: No\n 1: Yes\n'))
+                        if additionalInput != 0 or additionalInput != 1:
+                            print("Not a valid input. Enter an appropriate integer.\n")
+
+                    except ValueError or UnboundLocalError:
+                        print("Not a valid input. Enter an appropriate integer.\n")
+                        continue
+
+                    if additionalInput == 1:
+                        print("Potting from private garden\n")
+                        potFromPrivateGarden()
+                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                        break
+
+                    if additionalInput == 0:
+                        selectAppropriatePot(herbsToPot, herbsToPot.cardList)
+                        break
+                break
+
 
 def finalPot():
     potInput = None
