@@ -21,6 +21,9 @@ Three cards are drawn from the deck. Each card is drawn one at a time, and decid
 * Discard pile
 The same location cannot be selected twice in the same set of 3 cards
 
+### Potting your herbs
+Before the plant step, you may choose to pot your herbs in one of the 4 containers. You may pick any herbs that are in either the Community Garden or the Private Garden as long as they respect the limits of each container.
+
 ### Containers
 There are 4 different containers in which you may pot herbs in. 
 * Large pot: All the herbs in this container must be of the same type (1 to 7 herbs)
@@ -41,5 +44,5 @@ The game can end in 2 ways:
 ## Disclaimer
 Copyright 2018 by Anh-Tien Ton
 
-All game ideas and rules belong to Pencil First Games and the game creators (Eduardo Baraf, Steve Finn, Beth Sobel, and Keith Matejka). Please make sure to give them credit for such a pleasant and relaxing game. 
+All game ideas and rules belong to Pencil First Games and the game creators (Eduardo Baraf, Steve Finn, Beth Sobel, and Keith Matejka). Please make sure to give them credit for such a pleasant and relaxing game. This is just a recreation of their game on Python.
 
