@@ -170,7 +170,7 @@ herbsToPot = HerbsToPot()
 
 
 def clear_potted_herbs(herbs):
-    del HerbsToPot.cardList[:]
+    del herbs.cardList[:]
 
 
 def select_to_pot(card):
