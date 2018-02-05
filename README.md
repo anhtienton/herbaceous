@@ -4,7 +4,7 @@ Herbaceous SPV is the Single Player Variant of Steve Finn, Eduardo Baraf, and Be
 
 [Herbaceous BGG link](https://boardgamegeek.com/boardgame/195314/herbaceous)
 
-This is a fan project to see if it is possible to replicate the Herbaceous mechanics/engine in Python. Although it is not perfect, it should run on linux and Mac with Python 3.6. It only uses command line options. This was not made for monetary reasons (as it is on github) but only as a fun side-project and proof of concept.
+This is a fan project to see if it is possible to replicate the Herbaceous mechanics/engine in Python as a text-based game. Although it is not perfect, it should run on linux and Mac with Python 3.6. The game is played through command line inputs. This was not made for monetary reasons (as it is on github) but only as a fun side-project and proof of concept.
 
 ### Gameplay screenshot
 
