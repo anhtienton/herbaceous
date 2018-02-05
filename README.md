@@ -42,7 +42,7 @@ The game can end in 2 ways:
 * There is no more cards to draw. You are then given one last chance to pot any remaining herbs.
 
 ## Disclaimer
-Copyright 2018 by Anh-Tien Ton
+2018 anhtienton
 
 All game ideas and rules belong to Pencil First Games and the game creators (Eduardo Baraf, Steve Finn, Beth Sobel, and Keith Matejka). Please make sure to give them credit for such a pleasant and relaxing game. This is just a recreation of their game on Python.
 
