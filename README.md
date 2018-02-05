@@ -47,6 +47,8 @@ The game can end in 2 ways:
 ## Disclaimer
 2018 anhtienton
 
+Distributed for Free with permission of the publisher. Pencil First Games, LLC reserves all rights to the digital versions of Herbaceous in all forms and has copyright.
+
 All game ideas and rules belong to Pencil First Games and the game creators (Eduardo Baraf, Steve Finn, Beth Sobel, and Keith Matejka). Please make sure to give them credit for such a pleasant and relaxing game. This is just a recreation of their game on Python.
 
 [Pencil First Games](http://www.pencilfirstgames.com/)
