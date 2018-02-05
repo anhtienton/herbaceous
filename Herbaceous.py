@@ -294,20 +294,20 @@ def pot_in_glass_jar(herbs):
     if len(herbs.cardList) == 3:
         totalPoints += 6
 
-    special_herb = ["chive", "mint", "thyme"]
+    special_herb = ["Chive", "Mint", "Thyme"]
     herbname_list = sorted([x.herbName for x in herbs.cardList])
     present_special_herb = [herb for herb in herbname_list if herb in special_herb]
 
     for present_herb in present_special_herb:
-        if present_herb == "mint":
+        if present_herb == "Mint":
             totalPoints += 1
-            present_special_herb.remove("mint")
-        elif present_herb == "chive":
+            present_special_herb.remove("Mint")
+        elif present_herb == "Chive":
             totalPoints += 2
-            present_special_herb.remove("chive")
-        elif present_herb == "thyme":
+            present_special_herb.remove("Chive")
+        elif present_herb == "Thyme":
             totalPoints += 3
-            present_special_herb.remove("thyme")
+            present_special_herb.remove("Thyme")
 
     if not present_special_herb:
         totalPoints += 5
